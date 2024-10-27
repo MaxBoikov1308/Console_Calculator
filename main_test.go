@@ -5,24 +5,24 @@ import (
 	"testing"
 )
 
-func TestGetUTFLength(t *testing.T) {
+func TestCalc(t *testing.T) {
 	tests := []struct {
-		input    []byte
-		expected int
+		input    string
+		expected float64
 		err      error
 	}{
-		{[]byte("hello"), 5, nil},
-		{[]byte("こんにちは"), 5, nil},
-		{[]byte("你好"), 2, nil},
-		{[]byte(""), 0, nil},
-		{[]byte{0xFF}, 0, ErrInvalidUTF8},       // Неверная UTF-8 последовательность
-		{[]byte{0xE2, 0x82}, 0, ErrInvalidUTF8}, // Неполная последовательность
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
 	}
 
 	for _, test := range tests {
-		got, err := GetUTFLength(test.input)
+		got, err := Calc(test.input)
 		if got != test.expected || !errors.Is(err, test.err) {
-			t.Errorf("GetUTFLength(%q) = (%d, %v); want (%d, %v)", test.input, got, err, test.expected, test.err)
+			t.Errorf("Calc(%q) = (%b, %v); want (%b, %v)", test.input, got, err, test.expected, test.err)
 		}
 	}
 }

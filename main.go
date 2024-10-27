@@ -2,15 +2,37 @@ package main
 
 import (
 	"errors"
-	"unicode/utf8"
+	"fmt"
 )
 
-var ErrInvalidUTF8 = errors.New("invalid utf8")
+var ErrDivZero = errors.New("division by zero")
 
-func GetUTFLength(input []byte) (int, error) {
-	if !utf8.Valid(input) {
-		return 0, ErrInvalidUTF8
+func main() {
+	fmt.Println(Calc("1+1"))
+}
+
+func Calc(expression string) (float64, error) {
+	if len(expression) == 0 {
+		return 0, nil
 	}
+	return 0, nil
+}
 
-	return utf8.RuneCount(input), nil
+func Plus(a, b float64) (float64, error) {
+	return a + b, nil
+}
+
+func Minus(a, b float64) (float64, error) {
+	return a - b, nil
+}
+
+func Multiply(a, b float64) (float64, error) {
+	return a * b, nil
+}
+
+func Divide(a, b float64) (float64, error) {
+	if b == 0 {
+		return 0, ErrDivZero
+	}
+	return a / b, nil
 }
